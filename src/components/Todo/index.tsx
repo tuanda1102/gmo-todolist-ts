@@ -14,6 +14,17 @@ interface TodoItemProps {
 
 const Todo: React.FC<TodoItemProps> = ({ todo }) => {
   const [disabled, setDisabled] = useState<boolean>(true);
+  const [inputValue, setInputValue] = useState<string>(todo.title);
+
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleUpdateTodo = () => {
+    if (inputValue.trim()) {
+      console.log("handleUpdateTodo", inputValue);
+    }
+  };
 
   return (
     <div
@@ -31,7 +42,13 @@ const Todo: React.FC<TodoItemProps> = ({ todo }) => {
         <span className={cx("icon", "radio")}></span>
       )}
 
-      <input disabled={disabled} className={cx("input")} value={todo.title} />
+      <input
+        disabled={disabled}
+        className={cx("input")}
+        onChange={handleChangeInput}
+        onBlur={handleUpdateTodo}
+        value={inputValue}
+      />
 
       <span className={cx("icon", "trash-icon")}>
         <FontAwesomeIcon icon={faTrash} />

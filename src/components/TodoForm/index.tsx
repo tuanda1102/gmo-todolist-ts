@@ -18,11 +18,11 @@ const TodoForm: React.FC = () => {
 
   const handleAddTodo = (event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key === "Enter") {
-      const todo = {
-        title: inputValue,
-        status: "not_started" as StatusTodo,
-      };
       if (inputValue.trim()) {
+        const todo = {
+          title: inputValue,
+          status: "not_started" as StatusTodo,
+        };
         addTodo(dispatch, todo);
         setInputValue("");
       }

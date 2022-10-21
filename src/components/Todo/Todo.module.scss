@@ -6,6 +6,9 @@
   display: flex;
   align-items: center;
   padding: 0 24px;
+  &:hover {
+    border: 1px solid var(--blue-color);
+  }
 }
 
 .input {
@@ -15,9 +18,7 @@
   color: var(--blue-color);
   font-size: 14px;
   font-weight: 400;
-  &:disabled {
-    background-color: #ffffff;
-  }
+  background-color: transparent;
 }
 
 .radio {

@@ -6,6 +6,5 @@ export enum ActionType {
   CREATE_TASK = "create_task",
   UPDATE_TASK = "update_task",
   DELETE_TASK = "delete_task",
-  MARK_COMPLETED = "mark_completed",
-  MARK_NOT_COMPLETED = "mark_not_completed",
+  MARK_TASK = "mark_task",
 }

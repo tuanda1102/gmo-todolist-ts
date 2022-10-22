@@ -30,16 +30,12 @@ interface IUpdateTask {
 
 interface IDeleteTask {
   type: ActionType.DELETE_TASK;
+  payload: number;
 }
 
-interface IMarkCompleted {
-  type: ActionType.MARK_COMPLETED;
-  payload: StatusTodo;
-}
-
-interface IMarkNotCompleted {
-  type: ActionType.MARK_NOT_COMPLETED;
-  payload: StatusTodo;
+interface IMarkTask {
+  type: ActionType.MARK_TASK;
+  payload: ITodo;
 }
 
 export type Action =
@@ -47,8 +43,7 @@ export type Action =
   | ICreateTask
   | IUpdateTask
   | IDeleteTask
-  | IMarkCompleted
-  | IMarkNotCompleted
+  | IMarkTask
   | ILoading
   | ISuccess
   | IFail;

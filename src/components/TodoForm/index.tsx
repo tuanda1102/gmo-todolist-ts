@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import classNames from "classnames/bind";
 
 import styles from "./TodoForm.module.scss";
-import { addTodo } from "../../redux/action-creators";
+import { addTask } from "../../redux/action-creators";
 import { useAppDispatch } from "../../hooks";
 import { StatusTodo } from "../../types/todo";
 
@@ -20,10 +20,11 @@ const TodoForm: React.FC = () => {
     if (event.key === "Enter") {
       if (inputValue.trim()) {
         const todo = {
+          id: Date.now(),
           title: inputValue,
           status: "not_started" as StatusTodo,
         };
-        addTodo(dispatch, todo);
+        addTask(dispatch, todo);
         setInputValue("");
       }
     }
@@ -43,4 +44,4 @@ const TodoForm: React.FC = () => {
   );
 };
 
-export default TodoForm;
+export default memo(TodoForm);

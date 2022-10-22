@@ -3,9 +3,10 @@ import { Dispatch } from "redux";
 import { ActionType } from "./../action-types/index";
 import { Action } from "../actions";
 import {
-  addTodoApi,
+  addTaskApi,
+  deleteTaskApi,
   getListTasksApi,
-  markCompletedApi,
+  updateTaskApi,
 } from "../../services/todoService";
 import { ITodo } from "../../types/todo";
 
@@ -29,13 +30,13 @@ export const getListTasks = async (dispatch: Dispatch<Action>) => {
   }
 };
 
-export const addTodo = async (dispatch: Dispatch<Action>, data: ITodo) => {
+export const addTask = async (dispatch: Dispatch<Action>, data: ITodo) => {
   try {
     dispatch({
       type: ActionType.LOADING,
     });
 
-    const res = await addTodoApi(data);
+    const res = await addTaskApi(data);
 
     dispatch({
       type: ActionType.CREATE_TASK,
@@ -49,13 +50,38 @@ export const addTodo = async (dispatch: Dispatch<Action>, data: ITodo) => {
   }
 };
 
-export const markCompleted = async (dispatch: Dispatch<Action>) => {
+export const updateTask = async (dispatch: Dispatch<Action>, data: ITodo) => {
   try {
     dispatch({
       type: ActionType.LOADING,
     });
 
-    await markCompletedApi();
+    const res = await updateTaskApi(data);
+
+    dispatch({
+      type: ActionType.UPDATE_TASK,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: ActionType.FAIL,
+    });
+  }
+};
+
+export const deleteTask = async (dispatch: Dispatch<Action>, id: number) => {
+  try {
+    dispatch({
+      type: ActionType.LOADING,
+    });
+
+    await deleteTaskApi(id);
+
+    dispatch({
+      type: ActionType.DELETE_TASK,
+      payload: id,
+    });
   } catch (error) {
     console.log(error);
     dispatch({

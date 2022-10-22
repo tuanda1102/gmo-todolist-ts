@@ -5,10 +5,14 @@ export const getListTasksApi = async () => {
   return await axiosClient.get("/tasks");
 };
 
-export const addTodoApi = async (data: ITodo) => {
+export const addTaskApi = async (data: ITodo) => {
   return await axiosClient.post("/tasks", data);
 };
 
-export const markCompletedApi = async () => {
-  return await axiosClient.put("/tasks", { status: "completed" });
+export const updateTaskApi = async (data: ITodo) => {
+  return await axiosClient.put(`tasks/${data.id}`, data);
+};
+
+export const deleteTaskApi = async (id: number) => {
+  return await axiosClient.delete(`tasks/${id}`);
 };

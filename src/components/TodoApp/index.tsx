@@ -3,39 +3,23 @@ import classNames from "classnames/bind";
 
 import styles from "./TodoApp.module.scss";
 import TodoForm from "../TodoForm";
-import Todo from "../Todo";
 import { getListTasks } from "../../redux/action-creators";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { isLoadingSelector, todoListDataSelector } from "../../redux/selectors";
+import { isLoadingSelector } from "../../redux/selectors";
 import Loading from "../Loading";
+import TodosNotCompleted from "./TodosNotCompleted";
+import TodosCompleted from "./TodosCompleted";
 
 const cx = classNames.bind(styles);
 
 const TodoApp: React.FC = () => {
   const isLoading = useAppSelector(isLoadingSelector);
-  const todoListData = useAppSelector(todoListDataSelector);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     getListTasks(dispatch);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const renderTodoList = () => {
-    return todoListData
-      ?.filter((todo) => todo.status === "not_started")
-      .map((todo, index) => {
-        return <Todo key={index} todo={todo} />;
-      });
-  };
-
-  const renderCompletedTodo = () => {
-    return todoListData
-      ?.filter((todo) => todo.status === "completed")
-      .map((todo, index) => {
-        return <Todo key={index} todo={todo} />;
-      });
-  };
 
   return (
     <>
@@ -45,10 +29,10 @@ const TodoApp: React.FC = () => {
 
         <TodoForm />
 
-        {renderTodoList()}
+        <TodosNotCompleted />
 
         <h4 className={cx("completed-heading")}>Completed</h4>
-        {renderCompletedTodo()}
+        <TodosCompleted />
       </div>
     </>
   );

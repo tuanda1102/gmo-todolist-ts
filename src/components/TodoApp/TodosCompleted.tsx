@@ -1,7 +1,12 @@
 import React from "react";
+import classNames from "classnames/bind";
+
+import styles from "./TodoApp.module.scss";
 import { useAppSelector } from "../../hooks";
 import { todoListCompletedSelector } from "../../redux/selectors";
 import Todo from "../Todo";
+
+const cx = classNames.bind(styles);
 
 const TodosCompleted: React.FC = () => {
   const todoListCompleted = useAppSelector(todoListCompletedSelector);
@@ -12,7 +17,16 @@ const TodosCompleted: React.FC = () => {
     });
   };
 
-  return <>{renderCompletedTodo()}</>;
+  return (
+    <>
+      {!!todoListCompleted.length ? (
+        <h4 className={cx("completed-heading")}>Completed</h4>
+      ) : (
+        ""
+      )}
+      {renderCompletedTodo()}
+    </>
+  );
 };
 
 export default TodosCompleted;

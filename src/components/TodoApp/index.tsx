@@ -31,7 +31,6 @@ const TodoApp: React.FC = () => {
 
         <TodosNotCompleted />
 
-        <h4 className={cx("completed-heading")}>Completed</h4>
         <TodosCompleted />
       </div>
     </>

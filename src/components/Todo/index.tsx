@@ -22,10 +22,10 @@ const Todo: React.FC<TodoItemProps> = ({ todo }) => {
   };
 
   const handleUpdateTodo = () => {
-    if (inputValue.trim()) {
+    if (inputValue.trim() && inputValue.trim() !== todo.title) {
       updateTask(dispatch, {
         ...todo,
-        title: inputValue,
+        title: inputValue.trim(),
         status: "not_started",
       });
     }

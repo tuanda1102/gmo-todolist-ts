@@ -21,7 +21,7 @@ const TodoForm: React.FC = () => {
       if (inputValue.trim()) {
         const todo = {
           id: Date.now(),
-          title: inputValue,
+          title: inputValue.trim(),
           status: "not_started" as StatusTodo,
         };
         addTask(dispatch, todo);

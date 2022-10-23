@@ -31,6 +31,12 @@ const Todo: React.FC<TodoItemProps> = ({ todo }) => {
     }
   };
 
+  const handleEnterKeyUp = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key === "Enter") {
+      handleUpdateTodo();
+    }
+  };
+
   const handleMarkClick = () => {
     let status = "";
     todo.status === "not_started"
@@ -75,6 +81,7 @@ const Todo: React.FC<TodoItemProps> = ({ todo }) => {
         onChange={handleChangeInput}
         onBlur={handleUpdateTodo}
         value={inputValue}
+        onKeyUp={handleEnterKeyUp}
       />
 
       <span

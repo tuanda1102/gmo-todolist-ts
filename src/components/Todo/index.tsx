@@ -56,7 +56,11 @@ const Todo: React.FC<TodoItemProps> = ({ todo }) => {
         setDisabled(!disabled);
       }}
       onBlur={() => {
-        setDisabled(true);
+        if (inputValue.trim()) {
+          setDisabled(true);
+        } else {
+          setInputValue(todo.title);
+        }
       }}
     >
       {todo.status === "completed" ? (
